@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de senhas - Mayla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="conteudo">
+        <div class="conteudo-titulo">
+            <img src="cadeado.png" alt="cadeado fechado" onerror="this.style.display='none'; this.outerHTML='🔐'">
+            <h2 class="titulo-principal">🌿 Gerador de senhas da Mayla</h2>
+            <h3 class="titulo-secundario">Gere instantaneamente uma senha aleatória e segura! 🌱</h3>
+        </div>
+        
+        <div class="conteudo-senha">
+            <label for="senha">Senha</label>
+            <div class="campo-senha-wrapper">
+                <input name="senha" type="text" id="campo-senha" readonly>
+                <button class="btn-copiar" id="btnCopiar" title="Copiar senha">📋</button>
+            </div>
+        </div>
+
+        <div class="parametro">
+            <h3 class="parametro-titulo">🌱 Personalize sua senha</h3>
+            
+            <!-- AULA 7: DIVISÓRIA ANTES DAS COLUNAS -->
+            <div class="divisoria"></div>
+            
+            <div class="parametro-coluna__senha">
+                <!-- COLUNA 1: Número de caracteres -->
+                <div class="parametro-senha">
+                    <h4 class="parametro-senha__titulo">📏 Número de caracteres</h4>
+                    <div class="parametro-senha-botoes">
+                        <button class="parametro-senha__botao btn-diminuir" id="btnDiminuir">-</button>
+                        <p class="parametro-senha__texto" id="numeroSenha">12</p>
+                        <button class="parametro-senha__botao btn-aumentar" id="btnAumentar">+</button>
+                    </div>
+                    <!-- AULA 4: Mensagem de aviso -->
+                    <div class="aviso-senha" id="avisoSenha" style="display: none;">
+                        ⚠️ Mínimo de 6 caracteres!
+                    </div>
+                </div>
+
+                <!-- COLUNA 2: Características -->
+                <div class="parametro-senha">
+                    <h4 class="parametro-senha__titulo">📌 Características da senha</h4>
+                    <div class="parametro-senha-checkbox">
+                        <input name="maiusculo" type="checkbox" class="checkbox" id="chkMaiusculo" checked>
+                        <label for="chkMaiusculo">Letras maiúsculas</label>
+                    </div>
+                    <div class="parametro-senha-checkbox">
+                        <input name="minusculo" type="checkbox" class="checkbox" id="chkMinusculo" checked>
+                        <label for="chkMinusculo">Letras minúsculas</label>
+                    </div>
+                    <div class="parametro-senha-checkbox">
+                        <input name="numero" type="checkbox" class="checkbox" id="chkNumero" checked>
+                        <label for="chkNumero">Números</label>
+                    </div>
+                    <div class="parametro-senha-checkbox">
+                        <input name="simbolo" type="checkbox" class="checkbox" id="chkSimbolo">
+                        <label for="chkSimbolo">Símbolos</label>
+                    </div>
+                    <!-- AULA 2: Novos checkboxes -->
+                    <div class="parametro-senha-checkbox">
+                        <input name="especiais" type="checkbox" class="checkbox" id="chkEspeciais">
+                        <label for="chkEspeciais">Caracteres especiais avançados</label>
+                    </div>
+                    <div class="parametro-senha-checkbox">
+                        <input name="ambiguos" type="checkbox" class="checkbox" id="chkAmbiguos">
+                        <label for="chkAmbiguos">Evitar caracteres ambíguos</label>
+                    </div>
+                </div>
+
+                <!-- COLUNA 3: Força da senha -->
+                <div class="parametro-senha">
+                    <h4 class="parametro-senha__titulo">💪 Força da senha</h4>
+                    <div class="barra">
+                        <div class="forca" id="forcaSenha"></div>
+                    </div>
+                    <div class="parametro-senha-textos">
+                        <p class="texto-fraca">Fraca</p>
+                        <p class="texto-media">Média</p>
+                        <p class="texto-forte">Forte</p>
+                        <p class="texto-super-forte">Super Forte</p>
+                    </div>
+                    <!-- AULA 8: Entropia detalhada -->
+                    <p class="entropia" id="entropiaTexto"></p>
+                </div>
+            </div>
+
+            <!-- AULA 7: Seção de Classificação Etária -->
+            <div class="divisoria"></div>
+            
+            <div class="secao-idade">
+                <h4 class="secao-idade__titulo">👤 Classificação etária</h4>
+                <div class="secao-idade__input-group">
+                    <input type="number" id="campoIdade" placeholder="Digite sua idade" min="0" max="120">
+                    <button class="btn-classificar" id="btnClassificar">Classificar</button>
+                </div>
+                <div class="barra-idade">
+                    <div class="barra-idade__preenchimento" id="barraIdade"></div>
+                    <div class="barra-idade__marcadores">
+                        <span>🧒 Criança</span>
+                        <span>🧑 Adolescente</span>
+                        <span>👨 Adulto</span>
+                    </div>
+                </div>
+                <p class="resultado-idade" id="resultadoIdade">Digite sua idade para classificar</p>
+            </div>
+
+            <!-- AULA 4: Botões Gerar -->
+            <div class="divisoria"></div>
+            
+            <div class="botoes-gerar">
+                <button class="btn-gerar" id="btnGerar">🔄 Gerar Nova Senha</button>
+                <button class="btn-gerar-forte" id="btnGerarForte">💪 Gerar Senha Forte</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <strong>🌿 Gerador de Senhas da Mayla</strong> • 
+                Desenvolvido por <strong>Mayla</strong>
+            </p>
+            <p>
+                Projeto para estudo de JavaScript • 
+                <span id="ano-atual"></span>
+            </p>
+            <div class="footer-links">
+                <span>GitHub: não tenho</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

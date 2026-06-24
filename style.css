@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+
+:root {
+    /* 🌿 Nature Green - Cores personalizadas */
+    --branco: #F5F5F0;
+    --cor-de-fundo: #2D5A27;
+    --fundo-senha: #3A7D3C;
+    --fundo-texto: #1E3D1C;
+    --borda: #6B8F5E;
+    --hover-diminuir: #8B6B4A;
+    --hover-aumentar: #5A8F5A;
+    --roboto: 'Roboto', sans-serif;
+    --roboto-mono: 'Roboto Mono', monospace;
+    
+    /* Cores da barra de força - AULA 3 */
+    --cor-fraca-1: #c47a5a;
+    --cor-fraca-2: #d49a6b;
+    --cor-media-1: #d4b84a;
+    --cor-media-2: #e0cc6a;
+    --cor-forte-1: #6aad6a;
+    --cor-forte-2: #8acc8a;
+    --cor-super-forte-1: #4ac4a4;
+    --cor-super-forte-2: #6bcfb8;
+}
+
+* {
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--branco);
+    background-color: var(--cor-de-fundo);
+    font-family: var(--roboto);
+    min-height: 100vh;
+}
+
+.titulo-principal {
+    font-family: var(--roboto-mono);
+    font-size: 32px;
+}
+
+.titulo-secundario {
+    font-size: 24px;
+}
+
+.conteudo-titulo {
+    text-align: center;
+    margin-top: 80px;
+    padding: 0 20px;
+}
+
+.conteudo-senha {
+    margin-top: 80px;
+    background: var(--fundo-senha);
+    padding: 24px;
+    border-bottom: 6px solid var(--borda);
+    border-radius: 12px 12px 0 0;
+}
+
+.campo-senha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#campo-senha {
+    background-color: var(--fundo-senha);
+    border: none;
+    color: var(--branco);
+    font-family: var(--roboto-mono);
+    font-size: 40px;
+    width: 70%;
+    flex: 1;
+}
+
+#campo-senha:focus {
+    outline: none;
+}
+
+.btn-copiar {
+    background: var(--fundo-texto);
+    border: 2px solid var(--borda);
+    color: var(--branco);
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-copiar:hover {
+    background: var(--borda);
+    transform: scale(1.05);
+}
+
+.btn-copiar.copiado {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+.parametro {
+    background-color: var(--fundo-texto);
+    border: 2px solid var(--borda);
+    margin-top: 32px;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.parametro-titulo {
+    font-family: var(--roboto-mono);
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.parametro-senha__titulo {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.parametro-coluna__senha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+
+.parametro-senha {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.parametro-senha-botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* AULA 1 - Estilização dos botões com hover e transições */
+.parametro-senha__botao {
+    background-color: var(--fundo-texto);
+    color: var(--branco);
+    border: 2px solid var(--borda);
+    padding: 24px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60px;
+}
+
+.parametro-senha__botao:hover {
+    transform: scale(1.05);
+}
+
+/* Botão -: cor terrosa */
+.btn-diminuir:hover {
+    background-color: var(--hover-diminuir);
+    border-color: var(--hover-diminuir);
+    box-shadow: 0 0 20px rgba(139, 107, 74, 0.3);
+}
+
+/* Botão +: cor verde */
+.btn-aumentar:hover {
+    background-color: var(--hover-aumentar);
+    border-color: var(--hover-aumentar);
+    box-shadow: 0 0 20px rgba(90, 143, 90, 0.3);
+}
+
+.parametro-senha__texto {
+    padding: 24px;
+    border-top: 2px solid var(--borda);
+    border-bottom: 2px solid var(--borda);
+    margin: 0;
+    font-size: 24px;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* AULA 4 - Aviso de senha */
+.aviso-senha {
+    color: #ff6b35;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+label {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--borda);
+}
+
+.parametro-senha-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+/* Barra de força - AULA 3 */
+.barra {
+    background-color: var(--fundo-senha);
+    height: 30px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.forca {
+    height: 30px;
+    transition: width 0.5s ease, background 0.5s ease;
+    border-radius: 4px;
+}
+
+/* Cores com gradiente para cada nível */
+.forca.fraca {
+    width: 25%;
+    background: linear-gradient(to right, var(--cor-fraca-1), var(--cor-fraca-2));
+}
+
+.forca.media {
+    width: 50%;
+    background: linear-gradient(to right, var(--cor-media-1), var(--cor-media-2));
+}
+
+.forca.forte {
+    width: 75%;
+    background: linear-gradient(to right, var(--cor-forte-1), var(--cor-forte-2));
+}
+
+.forca.super-forte {
+    width: 100%;
+    background: linear-gradient(to right, var(--cor-super-forte-1), var(--cor-super-forte-2));
+    animation: pulsar 1.5s ease-in-out infinite;
+}
+
+/* Animação pulsante para Super Forte */
+@keyframes pulsar {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.85;
+        transform: scale(1.02);
+    }
+}
+
+.parametro-senha-textos {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+/* Cores dos textos de força */
+.texto-fraca {
+    color: var(--cor-fraca-1);
+}
+.texto-media {
+    color: var(--cor-media-1);
+}
+.texto-forte {
+    color: var(--cor-forte-1);
+}
+.texto-super-forte {
+    color: var(--cor-super-forte-1);
+}
+
+.entropia {
+    margin-top: 12px;
+    font-size: 14px;
+    font-style: italic;
+    min-height: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+/* AULA 7 - Divisória */
+.divisoria {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--borda), transparent);
+    margin: 24px 0;
+    opacity: 0.5;
+}
+
+/* AULA 7 - Seção de Classificação Etária */
+.secao-idade {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--borda);
+}
+
+.secao-idade__titulo {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.secao-idade__input-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+#campoIdade {
+    padding: 12px 16px;
+    border: 2px solid var(--borda);
+    border-radius: 8px;
+    background: var(--fundo-texto);
+    color: var(--branco);
+    font-size: 18px;
+    flex: 1;
+    min-width: 150px;
+}
+
+#campoIdade:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(107, 143, 94, 0.3);
+}
+
+.btn-classificar {
+    padding: 12px 24px;
+    background: var(--borda);
+    color: var(--fundo-texto);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-classificar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(107, 143, 94, 0.4);
+}
+
+.barra-idade {
+    background: var(--fundo-senha);
+    height: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.barra-idade__preenchimento {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--cor-fraca-1), var(--cor-media-1), var(--cor-forte-1));
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+.barra-idade__marcadores {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.resultado-idade {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    min-height: 28px;
+}
+
+/* AULA 4 - Botões Gerar */
+.botoes-gerar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.btn-gerar,
+.btn-gerar-forte {
+    padding: 16px 32px;
+    border: 2px solid var(--borda);
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--fundo-texto);
+    color: var(--branco);
+}
+
+.btn-gerar:hover:not(:disabled),
+.btn-gerar-forte:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-gerar:hover:not(:disabled) {
+    background: var(--hover-aumentar);
+    border-color: var(--hover-aumentar);
+}
+
+.btn-gerar-forte:hover:not(:disabled) {
+    background: var(--hover-diminuir);
+    border-color: var(--hover-diminuir);
+}
+
+/* AULA 4 - Botões desabilitados */
+.btn-gerar:disabled,
+.btn-gerar-forte:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Footer */
+.footer {
+    background-color: #1e1e2e;
+    color: #a8a8b3;
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 40px;
+    border-top: 1px solid #3a3a4d;
+    font-size: 0.9rem;
+}
+
+.footer .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer strong {
+    color: #fff;
+}
+
+.footer-links {
+    margin-top: 12px;
+}
+
+.footer-links a,
+.footer-links span {
+    color: #7b7b9b;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #00ff88;
+}
+
+/* Responsividade */
+@media screen and (min-width: 768px) {
+    .parametro-coluna__senha {
+        flex-direction: row;
+        gap: 24px;
+    }
+    
+    .parametro-senha {
+        width: 33.33%;
+    }
+    
+    .conteudo {
+        padding: 0 40px 40px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .titulo-principal {
+        font-size: 24px;
+    }
+    .titulo-secundario {
+        font-size: 18px;
+    }
+    #campo-senha {
+        font-size: 24px;
+    }
+    .parametro-senha__botao {
+        padding: 16px;
+        font-size: 20px;
+        width: 50px;
+    }
+    .parametro-senha__texto {
+        padding: 16px;
+        font-size: 20px;
+        min-width: 50px;
+    }
+    .botoes-gerar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-gerar,
+    .btn-gerar-forte {
+        width: 100%;
+        max-width: 300px;
+    }
+    .secao-idade__input-group {
+        flex-direction: column;
+    }
+    .btn-classificar {
+        width: 100%;
+    }
+    .campo-senha-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+    #campo-senha {
+        width: 100%;
+        font-size: 28px;
+        text-align: center;
+    }
+}
