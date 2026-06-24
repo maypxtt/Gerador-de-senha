@@ -7,7 +7,7 @@
 const numeroSenha = document.querySelector('.parametro-senha__texto');
 const campoSenha = document.querySelector('#campo-senha');
 const checkbox = document.querySelectorAll('.checkbox');
-const forcaSenha = document.querySelector('.forca');
+const forcaSenha = document.querySelector('#forcaSenha');
 const avisoSenha = document.querySelector('#avisoSenha');
 const btnGerar = document.querySelector('#btnGerar');
 const btnGerarForte = document.querySelector('#btnGerarForte');
@@ -17,7 +17,7 @@ const entropiaTexto = document.querySelector('#entropiaTexto');
 // Elementos da classificação de idade - AULA 7
 const campoIdade = document.querySelector('#campoIdade');
 const btnClassificar = document.querySelector('#btnClassificar');
-const barraIdade = document.querySelector('.barra-idade__preenchimento');
+const barraIdade = document.querySelector('#barraIdade');
 const resultadoIdade = document.querySelector('#resultadoIdade');
 
 // Conjuntos de caracteres
@@ -34,19 +34,22 @@ numeroSenha.textContent = tamanhoSenha;
 // ============================================
 // AULA 1 - Botões com hover personalizado
 // ============================================
-const botoes = document.querySelectorAll('.parametro-senha__botao');
 const btnDiminuir = document.querySelector('#btnDiminuir');
 const btnAumentar = document.querySelector('#btnAumentar');
 
 btnDiminuir.onclick = diminuiTamanho;
 btnAumentar.onclick = aumentaTamanho;
 
+// ============================================
+// ✅ AULA 4: FUNÇÕES DE TAMANHO (TRAVA NO 5)
+// ============================================
 function diminuiTamanho() {
-    if (tamanhoSenha > 1) {
+    // TRAVA NO 5 (não deixa ir abaixo de 5)
+    if (tamanhoSenha > 5) {
         tamanhoSenha--;
     }
     numeroSenha.textContent = tamanhoSenha;
-    atualizarBotoesGerar(); // AULA 4
+    verificarBotaoGerar();
     geraSenha();
 }
 
@@ -55,21 +58,28 @@ function aumentaTamanho() {
         tamanhoSenha++;
     }
     numeroSenha.textContent = tamanhoSenha;
-    atualizarBotoesGerar(); // AULA 4
+    verificarBotaoGerar();
     geraSenha();
 }
 
 // ============================================
-// AULA 4 - Atualizar botões gerar
+// ✅ AULA 4: CONTROLE DO BOTÃO GERAR SENHA
 // ============================================
-function atualizarBotoesGerar() {
+function verificarBotaoGerar() {
+    // REGRA: Desativar quando tamanho for MENOR que 6
     const desabilitado = tamanhoSenha < 6;
+    
+    // Aplicar desativação nos botões
     btnGerar.disabled = desabilitado;
     btnGerarForte.disabled = desabilitado;
     
     if (desabilitado) {
+        btnGerar.classList.add('btn-desativado');
+        btnGerarForte.classList.add('btn-desativado');
         avisoSenha.style.display = 'block';
     } else {
+        btnGerar.classList.remove('btn-desativado');
+        btnGerarForte.classList.remove('btn-desativado');
         avisoSenha.style.display = 'none';
     }
 }
@@ -88,7 +98,6 @@ btnCopiar.onclick = function() {
     const senha = campoSenha.value;
     if (!senha) return;
     
-    // Usando navigator.clipboard com fallback
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(senha).then(() => {
             feedbackCopiar();
@@ -135,10 +144,8 @@ function misturarCase(senha, temMaiusculas, temMinusculas) {
         for (let i = 0; i < senha.length; i++) {
             const char = senha[i];
             if (char >= 'A' && char <= 'Z') {
-                // Maiúscula: às vezes mantém, às vezes converte para minúscula
                 senhaMisturada += Math.random() > 0.5 ? char : char.toLowerCase();
             } else if (char >= 'a' && char <= 'z') {
-                // Minúscula: às vezes mantém, às vezes converte para maiúscula
                 senhaMisturada += Math.random() > 0.5 ? char : char.toUpperCase();
             } else {
                 senhaMisturada += char;
@@ -157,7 +164,6 @@ function misturarCase(senha, temMaiusculas, temMinusculas) {
         return senha.toLowerCase();
     }
     
-    // Se não tem nenhuma das duas (não deveria acontecer)
     return senha;
 }
 
@@ -167,7 +173,6 @@ function misturarCase(senha, temMaiusculas, temMinusculas) {
 function geraSenha() {
     let alfabeto = '';
     
-    // AULA 2 - Checkboxes originais + novos
     const temMaiusculas = checkbox[0].checked;
     const temMinusculas = checkbox[1].checked;
     const temNumeros = checkbox[2].checked;
@@ -212,7 +217,7 @@ function geraSenha() {
         senha += alfabeto[numeroAleatorio];
     }
     
-    // AULA 5 - Misturar maiúsculas e minúsculas (apenas se ambas estiverem ativas)
+    // AULA 5 - Misturar maiúsculas e minúsculas
     senha = misturarCase(senha, temMaiusculas, temMinusculas);
     
     campoSenha.value = senha;
@@ -234,21 +239,18 @@ function calcularEntropia(tamanhoAlfabeto) {
     let valor = 0;
     
     if (forca === 'super-forte') {
-        // Entropia > 65 bits
         const anos = Math.floor(2**entropia / (100e6 * 60 * 60 * 24 * 365));
         icone = '🛡️';
         unidade = 'anos';
         valor = anos || 'mais de 1 milhão';
         textoEntropia = `${icone} Um computador pode levar aproximadamente ${valor} ${unidade} para descobrir esta senha! (Entropia: ${Math.round(entropia)} bits)`;
     } else if (forca === 'forte') {
-        // Entropia > 52 bits
         const dias = Math.floor(2**entropia / (100e6 * 60 * 60 * 24));
         icone = '⏳';
         unidade = 'dias';
         valor = dias || 'menos de 1';
         textoEntropia = `${icone} Um computador pode levar aproximadamente ${valor} ${unidade} para descobrir esta senha! (Entropia: ${Math.round(entropia)} bits)`;
     } else {
-        // Fraca ou Média - Entropia ≤ 52 bits
         const horas = Math.floor(2**entropia / (100e6 * 60 * 60));
         icone = '⚠️';
         unidade = 'horas';
@@ -272,7 +274,7 @@ function classificaSenha(entropia) {
     } else if (entropia > 52) {
         forcaSenha.classList.add('forte');
         nivel = 'forte';
-    } else if (entropia > 35) {
+    } else if (entropia > 47) {
         forcaSenha.classList.add('media');
         nivel = 'media';
     } else {
@@ -288,12 +290,11 @@ function classificaSenha(entropia) {
 // ============================================
 function gerarSenhaForte() {
     // Ativar todos os checkboxes (menos o de evitar ambíguos)
-    checkbox[0].checked = true; // Maiúsculas
-    checkbox[1].checked = true; // Minúsculas
-    checkbox[2].checked = true; // Números
-    checkbox[3].checked = true; // Símbolos
-    checkbox[4].checked = true; // Especiais avançados
-    // checkbox[5] NÃO ativar (evitar ambíguos)
+    checkbox[0].checked = true;
+    checkbox[1].checked = true;
+    checkbox[2].checked = true;
+    checkbox[3].checked = true;
+    checkbox[4].checked = true;
     
     // Garantir no mínimo 12 caracteres
     if (tamanhoSenha < 12) {
@@ -301,7 +302,7 @@ function gerarSenhaForte() {
         numeroSenha.textContent = tamanhoSenha;
     }
     
-    atualizarBotoesGerar();
+    verificarBotaoGerar();
     geraSenha();
 }
 
@@ -348,7 +349,7 @@ btnClassificar.onclick = function() {
 // ============================================
 // INICIALIZAÇÃO
 // ============================================
-atualizarBotoesGerar();
+verificarBotaoGerar();
 geraSenha();
 
 // Ano no footer

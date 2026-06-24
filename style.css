@@ -228,7 +228,6 @@ label {
     border-radius: 4px;
 }
 
-/* Cores com gradiente para cada nível */
 .forca.fraca {
     width: 25%;
     background: linear-gradient(to right, var(--cor-fraca-1), var(--cor-fraca-2));
@@ -250,7 +249,6 @@ label {
     animation: pulsar 1.5s ease-in-out infinite;
 }
 
-/* Animação pulsante para Super Forte */
 @keyframes pulsar {
     0%, 100% {
         opacity: 1;
@@ -269,7 +267,6 @@ label {
     font-size: 14px;
 }
 
-/* Cores dos textos de força */
 .texto-fraca {
     color: var(--cor-fraca-1);
 }
@@ -431,6 +428,8 @@ label {
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
+    background: #555;
+    border-color: #555;
 }
 
 /* Footer */
@@ -497,35 +496,4 @@ label {
     .parametro-senha__botao {
         padding: 16px;
         font-size: 20px;
-        width: 50px;
-    }
-    .parametro-senha__texto {
-        padding: 16px;
-        font-size: 20px;
-        min-width: 50px;
-    }
-    .botoes-gerar {
-        flex-direction: column;
-        align-items: center;
-    }
-    .btn-gerar,
-    .btn-gerar-forte {
-        width: 100%;
-        max-width: 300px;
-    }
-    .secao-idade__input-group {
-        flex-direction: column;
-    }
-    .btn-classificar {
-        width: 100%;
-    }
-    .campo-senha-wrapper {
-        flex-direction: column;
-        gap: 8px;
-    }
-    #campo-senha {
-        width: 100%;
-        font-size: 28px;
-        text-align: center;
-    }
-}
+        width: 50
